@@ -1,0 +1,17 @@
+{
+	"name": "hidden-village-firebase-performance-test",
+	"version": "1.0.0",
+	"description": "Testing Firebase's Realtime Database's performance while writing data from the Hidden Village motion capture web app.",
+	"main": "main.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node main.js",
+		"clean": "node clean.js"
+	},
+	"author": "MNSU's eMotions Team - Spring 2023",
+	"license": "ISC",
+	"dependencies": {
+		"firebase": "^9.18.0"
+	},
+	"type": "module"
+}
