@@ -7,14 +7,12 @@ import { firebaseConfig } from './firebase-config.js'
 const app = initializeApp(firebaseConfig)
 
 const writeUserData = async () => {
-	// const writeUserData = () => {
 	const db = getDatabase()
 	const totalFramesSent = 30
 	const results = []
 
 	const start = Date.now()
 	for (let i = 0; i < totalFramesSent; i++) {
-		// push(ref(db, 'poseData/'), poseData)
 		results.push(push(ref(db, 'poseData/'), poseData))
 	}
 	await Promise.allSettled(results)
@@ -47,7 +45,7 @@ const writeUserData = async () => {
 		maxUsersByFramerate,
 	})
 
-	// process.exit()
+	process.exit()
 }
 
 writeUserData()
