@@ -8,7 +8,7 @@ const app = initializeApp(firebaseConfig)
 const deleteAllData = async () => {
 	const db = getDatabase()
 
-	await remove(ref(db, 'poseData/'))
+	await remove(ref(db, 'poseData/')), await remove(ref(db, 'logs/'))
 
 	process.exit()
 }
