@@ -5,9 +5,15 @@ import { poseData } from './pose-data.js'
 import { firebaseConfig } from './firebase-config.js'
 import { convertTimeTextToMs } from './convertTimeTextToMs.js'
 import { saveLog } from './logger.js'
+import { getCommandLineArgs } from './getCommandLineArgs.js'
 
-const runTimeString = '1s'
-const targetFps = 30
+const args = getCommandLineArgs(process.argv.slice(2))
+
+const runTimeString = args.time || '1s'
+const targetFps = args.fps ? parseInt(args.fps) : 30
+
+console.log('runTimeString: ', runTimeString)
+console.log('targetFps: ', targetFps)
 
 const app = initializeApp(firebaseConfig)
 const db = getDatabase()
