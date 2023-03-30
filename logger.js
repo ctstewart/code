@@ -12,15 +12,15 @@ import { getDatabase, ref, push } from 'firebase/database'
 // - Expected number of writes to Firebase
 // - Actual number of writes to Firebase
 // - Number of writes to Firebase that failed
-export const saveLog = async (
+export const saveLog = async ({
 	targetFps,
 	expectedRunTimeInMs,
 	actualRunTimeInMs,
 	actualRunTimeAfterSettledPromisesInMs,
 	numberOfWrites,
-	numberOfFailedPromises,
-	runTimeString
-) => {
+	runTimeString,
+	rejectedPromises,
+}) => {
 	const db = getDatabase()
 	const fps = {
 		targetFps,
@@ -66,8 +66,11 @@ export const saveLog = async (
 	const writes = {
 		expected: targetFps * (expectedRunTimeInMs / 1000),
 		actual: numberOfWrites,
-		failed: numberOfFailedPromises,
 		completed: numberOfWrites - numberOfFailedPromises,
+		rejected: {
+			amount: rejectedPromises.length,
+			list: rejectedPromises,
+		},
 	}
 
 	const log = {

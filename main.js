@@ -7,23 +7,19 @@ import { convertTimeTextToMs } from './convertTimeTextToMs.js'
 import { saveLog } from './logger.js'
 import { getCommandLineArgs } from './getCommandLineArgs.js'
 
-const args = getCommandLineArgs(process.argv.slice(2))
-
-const runTimeString = args.time || '1s'
-const targetFps = args.fps ? parseInt(args.fps) : 30
-
-console.log('runTimeString: ', runTimeString)
-console.log('targetFps: ', targetFps)
-
 const app = initializeApp(firebaseConfig)
 const db = getDatabase()
+
+const args = getCommandLineArgs(process.argv.slice(2))
+
+const runTimeString = args.time || '1m'
+const targetFps = args.fps ? parseInt(args.fps) : 30
 
 const writeUserData = (targetFps, runTimeString) => {
 	const runTimeMs = convertTimeTextToMs(runTimeString)
 	const totalFramesToSend = targetFps * (runTimeMs / 1000)
 	const promises = []
 	let counter = 0
-	let end1
 
 	console.log('Sending data...')
 	const start = Date.now()
@@ -32,25 +28,25 @@ const writeUserData = (targetFps, runTimeString) => {
 		counter++
 
 		if (counter === totalFramesToSend) {
-			end1 = Date.now() - start
+			const end1 = Date.now() - start
 			clearInterval(intervalId)
 			console.log('Done sending data.')
 			const settledPromises = await Promise.allSettled(promises)
 			const end2 = Date.now() - start
+			console.log('All promises settled.')
 			const rejectedPromises = settledPromises.filter(
 				(p) => p.status === 'rejected'
 			)
-			rejectedPromises.forEach((p) => console.log(p.reason))
-			console.log('All promises settled.')
-			saveLog(
+			// rejectedPromises.forEach((p) => console.log(p.reason))
+			saveLog({
 				targetFps,
-				runTimeMs,
-				end1,
-				end2,
-				counter,
-				rejectedPromises.length,
-				runTimeString
-			)
+				expectedRunTimeInMs: runTimeMs,
+				actualRunTimeInMs: end1,
+				actualRunTimeAfterSettledPromisesInMs: end2,
+				numberOfWrites: counter,
+				runTimeString,
+				rejectedPromises,
+			})
 			process.exit()
 		}
 	}, 1000 / targetFps)
