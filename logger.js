@@ -66,7 +66,7 @@ export const saveLog = async ({
 	const writes = {
 		expected: targetFps * (expectedRunTimeInMs / 1000),
 		actual: numberOfWrites,
-		completed: numberOfWrites - numberOfFailedPromises,
+		completed: numberOfWrites - rejectedPromises.length,
 		rejected: {
 			amount: rejectedPromises.length,
 			list: rejectedPromises,
@@ -80,4 +80,5 @@ export const saveLog = async ({
 	}
 
 	await push(ref(db, 'logs/'), log)
+	console.log('Log saved to Firebase.')
 }
