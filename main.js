@@ -21,7 +21,10 @@ const writeUserData = (targetFps, runTimeString) => {
 	const promises = []
 	let counter = 0
 
-	console.log('Sending data...')
+	// console.log('Sending data...')
+	console.log(
+		`Sending ${totalFramesToSend} frames at ${targetFps} fps for ${runTimeString}`
+	)
 	const start = Date.now()
 	const intervalId = setInterval(async () => {
 		promises.push(push(ref(db, 'poseData/'), poseData))
@@ -38,7 +41,7 @@ const writeUserData = (targetFps, runTimeString) => {
 				(p) => p.status === 'rejected'
 			)
 			// rejectedPromises.forEach((p) => console.log(p.reason))
-			saveLog({
+			await saveLog({
 				targetFps,
 				expectedRunTimeInMs: runTimeMs,
 				actualRunTimeInMs: end1,
