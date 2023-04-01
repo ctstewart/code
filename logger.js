@@ -66,7 +66,7 @@ export const saveLog = async ({
 	const writes = {
 		expected: targetFps * (expectedRunTimeInMs / 1000),
 		actual: numberOfWrites,
-		completed: numberOfWrites - rejectedPromises.length,
+		fulfilled: numberOfWrites - rejectedPromises.length,
 		rejected: {
 			amount: rejectedPromises.length,
 			list: rejectedPromises,
