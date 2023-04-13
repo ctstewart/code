@@ -1,3 +1,4 @@
+// poseData object taken from a single frame of the Hidden Village app
 export const poseData = {
 	image: {},
 	faceLandmarks: [
