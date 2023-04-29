@@ -9,14 +9,14 @@
 
 # Now that we have set up the GKE cluster with nodes, lets look at commands to run them.
 
-1. gcloud cheat-sheet: Display the cheat-sheet for commonly used GCP commands.
-2. kubectl edit deployment my-deployment: Open the specified deployment in the default text editor to make edits.
-3. kubectl get deployments: List all the deployments in the current namespace.
-4. kubectl delete deployments my-deployment: Delete the specified deployment named "my-deployment".
-5. kubectl config view: Show the current kubectl configuration file settings.
-6. kubectl apply -f manifest.yaml: Create or update Kubernetes objects described in the manifest file "manifest.yaml".
-7. gcloud container clusters get-credentials cluster-1 --zone=us-central1: Fetch the credentials for a specific cluster named "cluster-1" in the "us-central1" zone and merge them into the local kubectl configuration file.
-8. gcloud container clusters list: List all the GKE clusters in the current GCP project.
-9. kubectl create job loadtest --dry-run -o yaml --image=bob: Create a job configuration named "loadtest" using the Docker image "bob" and output the resulting YAML file without actually creating the job.
-10. kubectl delete -f manifest.yaml && kubectl apply -f manifest.yaml && kubectl get jobs.batch,pods: Delete and re-apply the Kubernetes objects described in the manifest file "manifest.yaml", and show the status of any jobs and pods created by the manifest.
-11. kubectl get pods -w: Watch the status of all pods in the current namespace and display updates in real-time.
+1. **gcloud cheat-sheet:** Display the cheat-sheet for commonly used GCP commands.
+2. **kubectl edit deployment my-deployment:** Open the specified deployment in the default text editor to make edits.
+3. **kubectl get deployments:** List all the deployments in the current namespace.
+4. **kubectl delete deployments my-deployment:** Delete the specified deployment named "my-deployment".
+5. **kubectl config view:** Show the current kubectl configuration file settings.
+6. **kubectl apply -f manifest.yaml:** Create or update Kubernetes objects described in the manifest file "manifest.yaml".
+7. **gcloud container clusters get-credentials cluster-1 --zone=us-central1:** Fetch the credentials for a specific cluster named "cluster-1" in the "us-central1" zone and merge them into the local kubectl configuration file.
+8. **gcloud container clusters list:** List all the GKE clusters in the current GCP project.
+9. **kubectl create job loadtest --dry-run -o yaml --image=bob:** Create a job configuration named "loadtest" using the Docker image "bob" and output the resulting YAML file without actually creating the job.
+10. **kubectl delete -f manifest.yaml && kubectl apply -f manifest.yaml && kubectl get jobs.batch,pods:** Delete and re-apply the Kubernetes objects described in the manifest file "manifest.yaml", and show the status of any jobs and pods created by the manifest.
+11. **kubectl get pods -w:** Watch the status of all pods in the current namespace and display updates in real-time.
